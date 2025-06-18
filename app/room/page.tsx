@@ -1,24 +1,24 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { LiveKitRoom } from '@livekit/components-react';
+import { useSearchParams } from 'next/navigation';
 
 export default function RoomPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
+  const room = searchParams.get('room') || 'default-room';
 
   if (!token) {
-    return <div>❌ No token provided in URL</div>;
+    return <div>❌ Missing token in URL</div>;
   }
 
   return (
     <LiveKitRoom
       token={token}
-      serverUrl="https://your-livekit-server.com" // Replace with your LiveKit server URL
-      connect
+      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
+      connect={true}
     >
-      {/* Your UI inside the room */}
-      <div style={{ padding: 20 }}>✅ Connected to room</div>
+      <div className="text-center p-4">✅ Connected to {room}</div>
     </LiveKitRoom>
   );
 }
