@@ -1,6 +1,6 @@
 'use client';
 
-import { LiveKitRoom } from '@livekit/components-react';
+import { LiveKitRoom, VideoConference } from '@livekit/components-react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from 'react';
 
@@ -16,8 +16,8 @@ function RoomContent() {
 
   if (!token) {
     return (
-      <div className="text-center p-10">
-        <p className="text-red-600 font-semibold">❌ No token provided in URL</p>
+      <div style={{ textAlign: 'center', padding: 20 }}>
+        <p style={{ color: 'red', fontWeight: 'bold' }}>❌ No token provided in URL</p>
       </div>
     );
   }
@@ -28,14 +28,14 @@ function RoomContent() {
       serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
       connect={true}
     >
-      <div className="text-center p-4">✅ Connected to room: {room}</div>
+      <VideoConference />
     </LiveKitRoom>
   );
 }
 
 export default function RoomPage() {
   return (
-    <Suspense fallback={<div className="p-10 text-center">Loading session…</div>}>
+    <Suspense fallback={<div style={{ textAlign: 'center', padding: 20 }}>Loading session…</div>}>
       <RoomContent />
     </Suspense>
   );
