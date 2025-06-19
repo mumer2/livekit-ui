@@ -1,9 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'standalone',
-  experimental: {
-    serverActions: {}, // ✅ use an object, NOT false or true
-  },
+const nextConfig: import('next').NextConfig = {
+  output: 'export', // REQUIRED for Netlify static hosting
+  reactStrictMode: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
